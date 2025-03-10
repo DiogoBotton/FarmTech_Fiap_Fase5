@@ -18,7 +18,7 @@ Sistema para prever rendimentos baseado em culturas e variáveis climáticas.
 
 ## 👩‍🏫 Professores:
 ### Tutor(a) 
-- <a href="https://www.linkedin.com/company/inova-fusca">Nome do Tutor</a>
+- <a href="https://www.linkedin.com/in/leonardoorabona?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app">Leonardo Ruiz Orabona</a>
 ### Coordenador(a)
 - <a href="https://www.linkedin.com/in/andregodoichiovato/">André Godoi</a>
 
@@ -35,7 +35,7 @@ Dentre os arquivos e pastas presentes na raiz do projeto, definem-se:
 
 - <b>scripts</b>: Aqui está um arquivo de implementação (deploy), no caso, o docker-compose.yml que realiza o deploy da API juntamente com o modelo.
 
-- <b>src</b>: Todo o código fonte criado, com o notebook de análise exploratória, treinamento do modelo e a API.
+- <b>src</b>: Todo o código fonte criado, com o notebook de análise exploratória, treinamento do modelo e a API, assim como, a atividade Ir Além com ESP32.
 
 ## 🔧 Como executar o código
 

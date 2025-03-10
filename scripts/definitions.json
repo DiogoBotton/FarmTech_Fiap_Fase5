@@ -22,7 +22,7 @@
       {
         "name": "dht11",
         "vhost": "/",
-        "durable": true,
+        "durable": false,
         "auto_delete": false,
         "arguments": {}
       }

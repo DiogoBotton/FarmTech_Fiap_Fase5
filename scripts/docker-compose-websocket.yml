@@ -1,0 +1,10 @@
+services:
+  apiwebsocket:
+    build:
+      context: ../src/IrAlem_Esp32
+      dockerfile: api/Dockerfile
+    environment:
+      - RABBITMQ_URL=amqp://guest:guest@host.docker.internal:5672 # host.docker.internal serve para se conectar à um serviço existente do docker
+      - RABBITMQ_QUEUE=dht11
+    ports:
+      - "5000:5000"
