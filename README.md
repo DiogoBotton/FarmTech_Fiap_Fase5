@@ -29,6 +29,8 @@ Este projeto tem como objetivo criar um modelo de machine learning de regressão
 
 Também foi realizado a atividade Ir Além com ESP32, onde é utilizado um Sensor DHT11 para capturar informações de temperatura e humidade e enviar para um Broker MQTT (RabbitMQ), onde a partir de uma API Python com WebSocket é possível o consumo dessas mensagens através um front em html.
 
+**Dentro da pasta src há um readme para cada projeto com detalhes**.
+
 ## 📁 Estrutura de pastas
 
 Dentre os arquivos e pastas presentes na raiz do projeto, definem-se:
