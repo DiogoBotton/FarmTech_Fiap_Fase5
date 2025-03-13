@@ -1,0 +1,40 @@
+services:
+  rabbitmq:
+    image: rabbitmq:4.0-management
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+      - "1883:1883"
+    volumes:
+      - ./definitions.json:/etc/rabbitmq/definitions.json
+    environment:
+      - RABBITMQ_SERVER_ADDITIONAL_ERL_ARGS=-rabbitmq_management load_definitions "/etc/rabbitmq/definitions.json"
+    healthcheck:
+      test: [ "CMD", "nc", "-z", "localhost", "5672" ]
+      interval: 5s
+      timeout: 15s
+      retries: 5
+    command: >
+      sh -c "rabbitmq-plugins enable rabbitmq_mqtt && rabbitmq-plugins enable rabbitmq_management && rabbitmq-server"
+    # networks:
+    #   - app_network
+
+# Da forma abaixo, é necessário uma reinicialização da API para funcionar a conexão do websocket com rabbitmq, por isso, foi comentado e passado para um docker-compose separado
+#   apiwebsocket:
+#     build:
+#       context: ../src/IrAlem_Esp32
+#       dockerfile: api/Dockerfile
+#     environment:
+#       - RABBITMQ_URL=amqp://guest:guest@rabbitmq:5672
+#       - RABBITMQ_QUEUE=dht11
+#     ports:
+#       - "5000:5000"
+#     depends_on:
+#       - rabbitmq
+#     entrypoint: ["sh", "-c", "sleep 10; exec \"$0\" \"$@\""] # Aguarda 10 segundos antes de inicializar a API
+#     networks:
+#       - app_network
+
+# networks:
+#   app_network:
+#     driver: bridge

@@ -18,7 +18,7 @@ Sistema para prever rendimentos baseado em culturas e variáveis climáticas.
 
 ## 👩‍🏫 Professores:
 ### Tutor(a) 
-- <a href="https://www.linkedin.com/company/inova-fusca">Nome do Tutor</a>
+- <a href="https://www.linkedin.com/in/leonardoorabona?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app">Leonardo Ruiz Orabona</a>
 ### Coordenador(a)
 - <a href="https://www.linkedin.com/in/andregodoichiovato/">André Godoi</a>
 
@@ -26,6 +26,10 @@ Sistema para prever rendimentos baseado em culturas e variáveis climáticas.
 ## 📜 Descrição
 
 Este projeto tem como objetivo criar um modelo de machine learning de regressão para prever valores de rendimento baseado no tipo da cultura (4 tipos variados) e variáveis climáticas, como humidade, precipitação e temperatura. Assim como, realizar uma estimativa de custos para usar uma máquina da AWS, que hipoteticamente, será utilizada para hospedar uma API com o modelo de machine learning de regressão mencionado anteriormente.
+
+Também foi realizado a atividade Ir Além com ESP32, onde é utilizado um Sensor DHT11 para capturar informações de temperatura e humidade e enviar para um Broker MQTT (RabbitMQ), onde a partir de uma API Python com WebSocket é possível o consumo dessas mensagens através um front em html.
+
+**Dentro da pasta src há um readme para cada projeto com detalhes**.
 
 ## 📁 Estrutura de pastas
 
@@ -35,7 +39,7 @@ Dentre os arquivos e pastas presentes na raiz do projeto, definem-se:
 
 - <b>scripts</b>: Aqui está um arquivo de implementação (deploy), no caso, o docker-compose.yml que realiza o deploy da API juntamente com o modelo.
 
-- <b>src</b>: Todo o código fonte criado, com o notebook de análise exploratória, treinamento do modelo e a API.
+- <b>src</b>: Todo o código fonte criado, com o notebook de análise exploratória, treinamento do modelo e a API, assim como, a atividade Ir Além com ESP32.
 
 ## 🔧 Como executar o código
 
