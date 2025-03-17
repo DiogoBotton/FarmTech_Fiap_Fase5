@@ -119,7 +119,7 @@ Apesar do custo 63% maior, a região de São Paulo (sa-east-1) é recomendada:
 ### 📊 Análise de Custos Projetados
 
 #### Custos por Componente (Estimativa Mensal)
-\`\`\`
+
 IoT Core    : $  50 (10K conexões)
 Lambda      : $  20 (2M execuções)
 S3          : $  30 (500GB)
@@ -129,7 +129,7 @@ Redshift    : $ 250 (2 nós dc2.large)
 QuickSight  : $  24 (2 usuários)
 --------------------------
 Total       : $ 604 /mês
-\`\`\`
+
 
 #### Otimizações Propostas
 
