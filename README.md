@@ -22,6 +22,15 @@ Sistema para prever rendimentos baseado em culturas e variáveis climáticas.
 ### Coordenador(a)
 - <a href="https://www.linkedin.com/in/andregodoichiovato/">André Godoi</a>
 
+## 📜 Descrição
+
+Este projeto tem como objetivo criar um modelo de machine learning de regressão para prever valores de rendimento baseado no tipo da cultura (4 tipos variados) e variáveis climáticas, como humidade, precipitação e temperatura. Assim como, realizar uma estimativa de custos para usar uma máquina da AWS, que hipoteticamente, será utilizada para hospedar uma API com o modelo de machine learning de regressão mencionado anteriormente.
+
+Também foi realizado a atividade Ir Além com ESP32, onde é utilizado um Sensor DHT11 para capturar informações de temperatura e humidade e enviar para um Broker MQTT (RabbitMQ), onde a partir de uma API Python com WebSocket é possível o consumo dessas mensagens através um front em html.
+
+**Dentro da pasta src há um readme para cada projeto com detalhes**.
+
+
 ## 💰 Análise de Custos e Arquitetura Cloud
 
 ### Links das Calculadoras AWS
@@ -31,62 +40,62 @@ Sistema para prever rendimentos baseado em culturas e variáveis climáticas.
 ### Comparação de Custos AWS por Região
 
 #### Configuração Analisada
-\- 2 CPUs
-\- 1 GiB memória
-\- Até 5 Gigabit de rede
-\- 50 GB armazenamento (HD)
+- 2 CPUs
+- 1 GiB memória
+- Até 5 Gigabit de rede
+- 50 GB armazenamento (HD)
 
 #### Custos Mensais (On-Demand 100%)
-\- **Região Norte da Virgínia (us-east-1)**: USD 13,38
-\- **Região São Paulo (sa-east-1)**: USD 21,80
+- **Região Norte da Virgínia (us-east-1)**: USD 13,38
+- **Região São Paulo (sa-east-1)**: USD 21,80
 
 ### Otimizações de Custos Propostas
 
 #### 1. Planos de Economia
-\- Savings Plans
-\- Instâncias Reservadas
-\- Spot Instances para workloads não críticos
+- Savings Plans
+- Instâncias Reservadas
+- Spot Instances para workloads não críticos
 
 #### 2. Arquitetura Proposta
 
-\`\`\`
+
 [Sensores] -> [IoT Core] -> [Lambda] -> [ECS] -> [ML Processing]
-\`\`\`
+
 
 #### Componentes da Arquitetura
 
 ##### Recepção de Dados
-\- **AWS IoT Core**
-  \- Gerenciamento de sensores
-  \- Protocolo MQTT
-  \- Regras de roteamento
+- **AWS IoT Core**
+- Gerenciamento de sensores
+- Protocolo MQTT
+- Regras de roteamento
 
 ##### Processamento
-\- **AWS Lambda**
-  \- Free tier: 1 milhão execuções/mês
-  \- Tempo máximo: 15 minutos
-  \- Processamento assíncrono
+- **AWS Lambda**
+  - Free tier: 1 milhão execuções/mês
+  - Tempo máximo: 15 minutos
+  - Processamento assíncrono
 
-\- **Amazon ECS**
-  \- Containers para ML
-  \- Auto-scaling
-  \- Custo-benefício otimizado
+- **Amazon ECS**
+  - Containers para ML
+  - Auto-scaling
+  - Custo-benefício otimizado
 
 ##### Armazenamento
-\- **Amazon S3**
-  \- Dados brutos
-  \- Backups
-  \- Custo efetivo
+- **Amazon S3**
+  - Dados brutos
+  - Backups
+  - Custo efetivo
 
 #### Recomendação Final
 Apesar do custo 63% maior, a região de São Paulo (sa-east-1) é recomendada:
-\- Conformidade legal
-\- Menor latência
-\- Performance local otimizada
+- Conformidade legal
+- Menor latência
+- Performance local otimizada
 
 ### Diagrama Simplificado
 
-\`\`\`
+
 +-------------+     +-----------+     +----------+
 |   Sensores  | --> | IoT Core  | --> |  Lambda  |
 +-------------+     +-----------+     +----------+
@@ -95,27 +104,19 @@ Apesar do custo 63% maior, a região de São Paulo (sa-east-1) é recomendada:
                     +-----------+     +----------+
                     |    ECS    | --> |    S3    |
                     +-----------+     +----------+
-\`\`\`
 
 ### Estimativas de Escala
 
 #### Básico (1K req/dia)
-\- Total: ~USD 50/mês
+- Total: ~USD 50/mês
 
 #### Médio (10K req/dia)
-\- Total: ~USD 160/mês
+- Total: ~USD 160/mês
 
 #### Alto (100K req/dia)
-\- Total: ~USD 470/mês
+- Total: ~USD 470/mês
 
 
-## 📜 Descrição
-
-Este projeto tem como objetivo criar um modelo de machine learning de regressão para prever valores de rendimento baseado no tipo da cultura (4 tipos variados) e variáveis climáticas, como humidade, precipitação e temperatura. Assim como, realizar uma estimativa de custos para usar uma máquina da AWS, que hipoteticamente, será utilizada para hospedar uma API com o modelo de machine learning de regressão mencionado anteriormente.
-
-Também foi realizado a atividade Ir Além com ESP32, onde é utilizado um Sensor DHT11 para capturar informações de temperatura e humidade e enviar para um Broker MQTT (RabbitMQ), onde a partir de uma API Python com WebSocket é possível o consumo dessas mensagens através um front em html.
-
-**Dentro da pasta src há um readme para cada projeto com detalhes**.
 
 ## 📁 Estrutura de pastas
 
