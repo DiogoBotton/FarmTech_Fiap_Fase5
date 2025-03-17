@@ -120,15 +120,18 @@ Apesar do custo 63% maior, a região de São Paulo (sa-east-1) é recomendada:
 
 #### Custos por Componente (Estimativa Mensal)
 
-IoT Core    : $  50 (10K conexões)
-Lambda      : $  20 (2M execuções)
-S3          : $  30 (500GB)
-ECS         : $ 150 (2 instâncias)
-Glue        : $  80 (40 DPUs/mês)
-Redshift    : $ 250 (2 nós dc2.large)
-QuickSight  : $  24 (2 usuários)
---------------------------
-Total       : $ 604 /mês
+### Custos por Componente (Estimativa Mensal)
+
+| Componente  | Custo (USD) | Especificação |
+|:------------|------------:|:--------------|
+| IoT Core    | $50         | 10K conexões  |
+| Lambda      | $20         | 2M execuções  |
+| S3          | $30         | 500GB        |
+| ECS         | $150        | 2 instâncias |
+| Glue        | $80         | 40 DPUs/mês  |
+| Redshift    | $250        | 2 nós dc2.large |
+| QuickSight  | $24         | 2 usuários    |
+| **Total**   | **$604**    | **mensal**    |
 
 
 #### Otimizações Propostas
@@ -151,12 +154,13 @@ Total       : $ 604 /mês
 ### 📈 Projeção de Crescimento
 
 #### Cenários de Escala
-\`\`\`
-Atual    :    1K req/dia  ->  $  50/mês
-6 meses  :   10K req/dia  ->  $ 160/mês
-1 ano    :  100K req/dia  ->  $ 470/mês
-2 anos   :  500K req/dia  ->  $ 900/mês
-\`\`\`
+
+| Período     | Requisições/dia | Custo Mensal |
+|:------------|---------------:|-------------:|
+| Atual       | 1K             | $50          |
+| 6 meses     | 10K            | $160         |
+| 1 ano       | 100K           | $470         |
+| 2 anos      | 500K           | $900         |
 
 ### 🔄 Ciclo de Dados
 1. **Coleta**: Sensores -> IoT Core
