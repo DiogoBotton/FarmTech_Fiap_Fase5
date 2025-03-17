@@ -22,6 +22,92 @@ Sistema para prever rendimentos baseado em culturas e variáveis climáticas.
 ### Coordenador(a)
 - <a href="https://www.linkedin.com/in/andregodoichiovato/">André Godoi</a>
 
+## 💰 Análise de Custos e Arquitetura Cloud
+
+### Links das Calculadoras AWS
+- [Calculadora 1](https://calculator.aws/#/estimate?id=fd3a9a6e6007c2826b98a0f455ae6ac1414c8312)
+- [Calculadora 2](https://calculator.aws/#/estimate?id=2d55afdcbf9edbe54be830246c2daf0505828871)
+
+### Comparação de Custos AWS por Região
+
+#### Configuração Analisada
+\- 2 CPUs
+\- 1 GiB memória
+\- Até 5 Gigabit de rede
+\- 50 GB armazenamento (HD)
+
+#### Custos Mensais (On-Demand 100%)
+\- **Região Norte da Virgínia (us-east-1)**: USD 13,38
+\- **Região São Paulo (sa-east-1)**: USD 21,80
+
+### Otimizações de Custos Propostas
+
+#### 1. Planos de Economia
+\- Savings Plans
+\- Instâncias Reservadas
+\- Spot Instances para workloads não críticos
+
+#### 2. Arquitetura Proposta
+
+\`\`\`
+[Sensores] -> [IoT Core] -> [Lambda] -> [ECS] -> [ML Processing]
+\`\`\`
+
+#### Componentes da Arquitetura
+
+##### Recepção de Dados
+\- **AWS IoT Core**
+  \- Gerenciamento de sensores
+  \- Protocolo MQTT
+  \- Regras de roteamento
+
+##### Processamento
+\- **AWS Lambda**
+  \- Free tier: 1 milhão execuções/mês
+  \- Tempo máximo: 15 minutos
+  \- Processamento assíncrono
+
+\- **Amazon ECS**
+  \- Containers para ML
+  \- Auto-scaling
+  \- Custo-benefício otimizado
+
+##### Armazenamento
+\- **Amazon S3**
+  \- Dados brutos
+  \- Backups
+  \- Custo efetivo
+
+#### Recomendação Final
+Apesar do custo 63% maior, a região de São Paulo (sa-east-1) é recomendada:
+\- Conformidade legal
+\- Menor latência
+\- Performance local otimizada
+
+### Diagrama Simplificado
+
+\`\`\`
++-------------+     +-----------+     +----------+
+|   Sensores  | --> | IoT Core  | --> |  Lambda  |
++-------------+     +-----------+     +----------+
+                          |                |
+                          v                v
+                    +-----------+     +----------+
+                    |    ECS    | --> |    S3    |
+                    +-----------+     +----------+
+\`\`\`
+
+### Estimativas de Escala
+
+#### Básico (1K req/dia)
+\- Total: ~USD 50/mês
+
+#### Médio (10K req/dia)
+\- Total: ~USD 160/mês
+
+#### Alto (100K req/dia)
+\- Total: ~USD 470/mês
+
 
 ## 📜 Descrição
 
