@@ -93,30 +93,111 @@ Apesar do custo 63% maior, a região de São Paulo (sa-east-1) é recomendada:
 - Menor latência
 - Performance local otimizada
 
-### Diagrama Simplificado
+### 🚀 Arquitetura Futura e Análise de Custos
 
+### Diagrama de Arquitetura
+<p align="center">
+<img src="assets/iot.drawio.png" alt="Diagrama de Arquitetura IoT" width="100%">
+</p>
 
-+-------------+     +-----------+     +----------+
-|   Sensores  | --> | IoT Core  | --> |  Lambda  |
-+-------------+     +-----------+     +----------+
-                          |                |
-                          v                v
-                    +-----------+     +----------+
-                    |    ECS    | --> |    S3    |
-                    +-----------+     +----------+
+### Fluxo Detalhado
+1. **Ingestão de Dados**:
+   - Sensores enviam dados brutos
+   - IoT Core gerencia conexões MQTT
+   - Lambda processa e valida dados
 
-### Estimativas de Escala
+2. **Processamento e Armazenamento**:
+   - S3 armazena dados validados
+   - ECS executa modelos ML
+   - Predições são persistidas
 
-#### Básico (1K req/dia)
-- Total: ~USD 50/mês
+3. **Análise e Visualização**:
+   - Glue cataloga dados
+   - Redshift permite análises complexas
+   - QuickSight gera dashboards
 
-#### Médio (10K req/dia)
-- Total: ~USD 160/mês
+### 📊 Análise de Custos Projetados
 
-#### Alto (100K req/dia)
-- Total: ~USD 470/mês
+#### Custos por Componente (Estimativa Mensal)
+\`\`\`
+IoT Core    : $  50 (10K conexões)
+Lambda      : $  20 (2M execuções)
+S3          : $  30 (500GB)
+ECS         : $ 150 (2 instâncias)
+Glue        : $  80 (40 DPUs/mês)
+Redshift    : $ 250 (2 nós dc2.large)
+QuickSight  : $  24 (2 usuários)
+--------------------------
+Total       : $ 604 /mês
+\`\`\`
 
+#### Otimizações Propostas
 
+1. **Curto Prazo**:
+   - Savings Plans para ECS
+   - S3 Intelligent-Tiering
+   - Redshift Reserved Instances
+
+2. **Médio Prazo**:
+   - Implementar cache em memória
+   - Otimizar queries Redshift
+   - Ajustar TTL dos dados
+
+3. **Longo Prazo**:
+   - Migrar para arquitetura serverless
+   - Implementar data lifecycle
+   - Automatizar scaling
+
+### 📈 Projeção de Crescimento
+
+#### Cenários de Escala
+\`\`\`
+Atual    :    1K req/dia  ->  $  50/mês
+6 meses  :   10K req/dia  ->  $ 160/mês
+1 ano    :  100K req/dia  ->  $ 470/mês
+2 anos   :  500K req/dia  ->  $ 900/mês
+\`\`\`
+
+### 🔄 Ciclo de Dados
+1. **Coleta**: Sensores -> IoT Core
+2. **Validação**: Lambda
+3. **Processamento**: ECS/ML
+4. **Armazenamento**: S3/Redshift
+5. **Análise**: QuickSight
+
+### 🎯 Benefícios Esperados
+
+#### Performance
+- Latência < 100ms
+- Disponibilidade 99.9%
+- Processamento near real-time
+
+#### Escalabilidade
+- Auto-scaling em todas camadas
+- Elastic Load Balancing
+- Multi-AZ deployment
+
+#### Segurança
+- Encryption em repouso
+- VPC endpoints
+- IAM roles granulares
+
+### 💡 Recomendações Técnicas
+
+1. **Ingestão**:
+   - Implementar retry policy
+   - Buffer para picos
+   - Validação em tempo real
+
+2. **Processamento**:
+   - Containers otimizados
+   - Cache distribuído
+   - Batch processing
+
+3. **Análise**:
+   - Materialized views
+   - Query optimization
+   - Data partitioning
 
 ## 📁 Estrutura de pastas
 
