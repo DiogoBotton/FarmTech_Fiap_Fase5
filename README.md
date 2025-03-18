@@ -31,6 +31,55 @@ Também foi realizado a atividade Ir Além com ESP32, onde é utilizado um Senso
 **Dentro da pasta src há um readme para cada projeto com detalhes**.
 
 
+## 💰 Análise Comparativa de Custos
+
+#### Comparação EC2 por Região
+| Região      | Custo Mensal | vCPUs | Memória | Rede      |
+|:------------|-------------:|:------|:--------|:----------|
+| us-east-1   | $13,38       | 2     | 1 GiB   | 5 Gigabit |
+| sa-east-1   | $21,80       | 2     | 1 GiB   | 5 Gigabit |
+
+#### Comparação por Tipo de Instância (sa-east-1)
+| Tipo        | vCPUs | Memória | Custo Mensal | Uso Recomendado |
+|:------------|------:|--------:|-------------:|:----------------|
+| t3.micro    | 2     | 1 GiB   | $21,80       | Desenvolvimento |
+| t3.small    | 2     | 2 GiB   | $43,60       | Teste          |
+| t3.medium   | 2     | 4 GiB   | $87,20       | Produção       |
+
+#### Custos de Infraestrutura Completa
+| Componente  | Custo (USD) | Especificação |
+|:------------|------------:|:--------------|
+| IoT Core    | $50         | 10K conexões  |
+| Lambda      | $20         | 2M execuções  |
+| S3          | $30         | 500GB        |
+| ECS         | $150        | 2 instâncias |
+| Glue        | $80         | 40 DPUs/mês  |
+| Redshift    | $250        | 2 nós dc2.large |
+| QuickSight  | $24         | 2 usuários    |
+| **Total**   | **$604**    | **mensal**    |
+
+#### Projeção de Crescimento
+| Período     | Requisições/dia | Custo Mensal | Crescimento |
+|:------------|---------------:|-------------:|------------:|
+| Atual       | 1K             | $50          | -           |
+| 6 meses     | 10K            | $160         | 220%        |
+| 1 ano       | 100K           | $470         | 840%        |
+| 2 anos      | 500K           | $900         | 1700%       |
+
+#### Otimizações de Custo Disponíveis
+| Estratégia          | Economia Potencial | Complexidade |
+|:-------------------|------------------:|:-------------|
+| Savings Plans      | Até 72%           | Baixa        |
+| Reserved Instances | Até 75%           | Média        |
+| Spot Instances     | Até 90%           | Alta         |
+
+#### Comparativo de Custos por Ambiente
+| Ambiente     | Custo Base | Com Otimização | Economia |
+|:-------------|------------:|---------------:|---------:|
+| Dev/Test     | $300        | $90            | 70%      |
+| Staging      | $450        | $180           | 60%      |
+| Production   | $604        | $302           | 50%      |
+
 ## 💰 Análise de Custos e Arquitetura Cloud
 
 ### Links das Calculadoras AWS
@@ -202,6 +251,26 @@ Apesar do custo 63% maior, a região de São Paulo (sa-east-1) é recomendada:
    - Materialized views
    - Query optimization
    - Data partitioning
+
+## 💰 Análise Comparativa de Custos
+
+### Visualizações dos Custos
+
+#### Comparação por Região
+<p align="center">
+<img src="assets/regiao.png" alt="Comparação de Custos por Região AWS" width="100%">
+</p>
+
+#### Distribuição de Custos por Serviço
+<p align="center">
+<img src="assets/distribuicao.png" alt="Distribuição de Custos por Serviço AWS" width="100%">
+</p>
+
+#### Projeção de Crescimento
+<p align="center">
+<img src="assets/projecao.png" alt="Projeção de Crescimento de Custos AWS" width="100%">
+</p>
+
 
 ## 📁 Estrutura de pastas
 
