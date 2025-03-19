@@ -22,7 +22,6 @@ Sistema para prever rendimentos baseado em culturas e variáveis climáticas.
 ### Coordenador(a)
 - <a href="https://www.linkedin.com/in/andregodoichiovato/">André Godoi</a>
 
-
 ## 📜 Descrição
 
 Este projeto tem como objetivo criar um modelo de machine learning de regressão para prever valores de rendimento baseado no tipo da cultura (4 tipos variados) e variáveis climáticas, como humidade, precipitação e temperatura. Assim como, realizar uma estimativa de custos para usar uma máquina da AWS, que hipoteticamente, será utilizada para hospedar uma API com o modelo de machine learning de regressão mencionado anteriormente.
@@ -30,6 +29,248 @@ Este projeto tem como objetivo criar um modelo de machine learning de regressão
 Também foi realizado a atividade Ir Além com ESP32, onde é utilizado um Sensor DHT11 para capturar informações de temperatura e humidade e enviar para um Broker MQTT (RabbitMQ), onde a partir de uma API Python com WebSocket é possível o consumo dessas mensagens através um front em html.
 
 **Dentro da pasta src há um readme para cada projeto com detalhes**.
+
+
+## 💰 Análise Comparativa de Custos
+
+#### Comparação EC2 por Região
+| Região      | Custo Mensal | vCPUs | Memória | Rede      |
+|:------------|-------------:|:------|:--------|:----------|
+| us-east-1   | $13,38       | 2     | 1 GiB   | 5 Gigabit |
+| sa-east-1   | $21,80       | 2     | 1 GiB   | 5 Gigabit |
+
+#### Comparação por Tipo de Instância (sa-east-1)
+| Tipo        | vCPUs | Memória | Custo Mensal | Uso Recomendado |
+|:------------|------:|--------:|-------------:|:----------------|
+| t3.micro    | 2     | 1 GiB   | $21,80       | Desenvolvimento |
+| t3.small    | 2     | 2 GiB   | $43,60       | Teste          |
+| t3.medium   | 2     | 4 GiB   | $87,20       | Produção       |
+
+#### Custos de Infraestrutura Completa
+| Componente  | Custo (USD) | Especificação |
+|:------------|------------:|:--------------|
+| IoT Core    | $50         | 10K conexões  |
+| Lambda      | $20         | 2M execuções  |
+| S3          | $30         | 500GB        |
+| ECS         | $150        | 2 instâncias |
+| Glue        | $80         | 40 DPUs/mês  |
+| Redshift    | $250        | 2 nós dc2.large |
+| QuickSight  | $24         | 2 usuários    |
+| **Total**   | **$604**    | **mensal**    |
+
+#### Projeção de Crescimento
+| Período     | Requisições/dia | Custo Mensal | Crescimento |
+|:------------|---------------:|-------------:|------------:|
+| Atual       | 1K             | $50          | -           |
+| 6 meses     | 10K            | $160         | 220%        |
+| 1 ano       | 100K           | $470         | 840%        |
+| 2 anos      | 500K           | $900         | 1700%       |
+
+#### Otimizações de Custo Disponíveis
+| Estratégia          | Economia Potencial | Complexidade |
+|:-------------------|------------------:|:-------------|
+| Savings Plans      | Até 72%           | Baixa        |
+| Reserved Instances | Até 75%           | Média        |
+| Spot Instances     | Até 90%           | Alta         |
+
+#### Comparativo de Custos por Ambiente
+| Ambiente     | Custo Base | Com Otimização | Economia |
+|:-------------|------------:|---------------:|---------:|
+| Dev/Test     | $300        | $90            | 70%      |
+| Staging      | $450        | $180           | 60%      |
+| Production   | $604        | $302           | 50%      |
+
+## 💰 Análise de Custos e Arquitetura Cloud
+
+### Links das Calculadoras AWS
+- [Calculadora 1](https://calculator.aws/#/estimate?id=fd3a9a6e6007c2826b98a0f455ae6ac1414c8312)
+- [Calculadora 2](https://calculator.aws/#/estimate?id=2d55afdcbf9edbe54be830246c2daf0505828871)
+
+### Comparação de Custos AWS por Região
+
+#### Configuração Analisada
+- 2 CPUs
+- 1 GiB memória
+- Até 5 Gigabit de rede
+- 50 GB armazenamento (HD)
+
+#### Custos Mensais (On-Demand 100%)
+- **Região Norte da Virgínia (us-east-1)**: USD 13,38
+- **Região São Paulo (sa-east-1)**: USD 21,80
+
+### Otimizações de Custos Propostas
+
+#### 1. Planos de Economia
+- Savings Plans
+- Instâncias Reservadas
+- Spot Instances para workloads não críticos
+
+#### 2. Arquitetura Proposta
+
+
+[Sensores] -> [IoT Core] -> [Lambda] -> [ECS] -> [ML Processing]
+
+
+#### Componentes da Arquitetura
+
+##### Recepção de Dados
+- **AWS IoT Core**
+- Gerenciamento de sensores
+- Protocolo MQTT
+- Regras de roteamento
+
+##### Processamento
+- **AWS Lambda**
+  - Free tier: 1 milhão execuções/mês
+  - Tempo máximo: 15 minutos
+  - Processamento assíncrono
+
+- **Amazon ECS**
+  - Containers para ML
+  - Auto-scaling
+  - Custo-benefício otimizado
+
+##### Armazenamento
+- **Amazon S3**
+  - Dados brutos
+  - Backups
+  - Custo efetivo
+
+#### Recomendação Final
+Apesar do custo 63% maior, a região de São Paulo (sa-east-1) é recomendada:
+- Conformidade legal
+- Menor latência
+- Performance local otimizada
+
+### 🚀 Arquitetura Futura e Análise de Custos
+
+### Diagrama de Arquitetura
+<p align="center">
+<img src="assets/iot.drawio.png" alt="Diagrama de Arquitetura IoT" width="100%">
+</p>
+
+### Fluxo Detalhado
+1. **Ingestão de Dados**:
+   - Sensores enviam dados brutos
+   - IoT Core gerencia conexões MQTT
+   - Lambda processa e valida dados
+
+2. **Processamento e Armazenamento**:
+   - S3 armazena dados validados
+   - ECS executa modelos ML
+   - Predições são persistidas
+
+3. **Análise e Visualização**:
+   - Glue cataloga dados
+   - Redshift permite análises complexas
+   - QuickSight gera dashboards
+
+### 📊 Análise de Custos Projetados
+
+#### Custos por Componente (Estimativa Mensal)
+
+### Custos por Componente (Estimativa Mensal)
+
+| Componente  | Custo (USD) | Especificação |
+|:------------|------------:|:--------------|
+| IoT Core    | $50         | 10K conexões  |
+| Lambda      | $20         | 2M execuções  |
+| S3          | $30         | 500GB        |
+| ECS         | $150        | 2 instâncias |
+| Glue        | $80         | 40 DPUs/mês  |
+| Redshift    | $250        | 2 nós dc2.large |
+| QuickSight  | $24         | 2 usuários    |
+| **Total**   | **$604**    | **mensal**    |
+
+
+#### Otimizações Propostas
+
+1. **Curto Prazo**:
+   - Savings Plans para ECS
+   - S3 Intelligent-Tiering
+   - Redshift Reserved Instances
+
+2. **Médio Prazo**:
+   - Implementar cache em memória
+   - Otimizar queries Redshift
+   - Ajustar TTL dos dados
+
+3. **Longo Prazo**:
+   - Migrar para arquitetura serverless
+   - Implementar data lifecycle
+   - Automatizar scaling
+
+### 📈 Projeção de Crescimento
+
+#### Cenários de Escala
+
+| Período     | Requisições/dia | Custo Mensal |
+|:------------|---------------:|-------------:|
+| Atual       | 1K             | $50          |
+| 6 meses     | 10K            | $160         |
+| 1 ano       | 100K           | $470         |
+| 2 anos      | 500K           | $900         |
+
+### 🔄 Ciclo de Dados
+1. **Coleta**: Sensores -> IoT Core
+2. **Validação**: Lambda
+3. **Processamento**: ECS/ML
+4. **Armazenamento**: S3/Redshift
+5. **Análise**: QuickSight
+
+### 🎯 Benefícios Esperados
+
+#### Performance
+- Latência < 100ms
+- Disponibilidade 99.9%
+- Processamento near real-time
+
+#### Escalabilidade
+- Auto-scaling em todas camadas
+- Elastic Load Balancing
+- Multi-AZ deployment
+
+#### Segurança
+- Encryption em repouso
+- VPC endpoints
+- IAM roles granulares
+
+### 💡 Recomendações Técnicas
+
+1. **Ingestão**:
+   - Implementar retry policy
+   - Buffer para picos
+   - Validação em tempo real
+
+2. **Processamento**:
+   - Containers otimizados
+   - Cache distribuído
+   - Batch processing
+
+3. **Análise**:
+   - Materialized views
+   - Query optimization
+   - Data partitioning
+
+## 💰 Análise Comparativa de Custos
+
+### Visualizações dos Custos
+
+#### Comparação por Região
+<p align="center">
+<img src="assets/regiao.png" alt="Comparação de Custos por Região AWS" width="100%">
+</p>
+
+#### Distribuição de Custos por Serviço
+<p align="center">
+<img src="assets/distribuicao.png" alt="Distribuição de Custos por Serviço AWS" width="100%">
+</p>
+
+#### Projeção de Crescimento
+<p align="center">
+<img src="assets/projecao.png" alt="Projeção de Crescimento de Custos AWS" width="100%">
+</p>
+
 
 ## 📁 Estrutura de pastas
 
